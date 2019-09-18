@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import uuid from 'uuid';
-import './App.css';
+import './css/App.css';
 import TeamList from './components/TeamList';
 import Form from './components/Form';
 import { initialFormValues, initialTeamMembers } from './data/data';
