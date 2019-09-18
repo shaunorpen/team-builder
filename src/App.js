@@ -29,15 +29,24 @@ function App() {
         <h2>Team List</h2>
         <TeamList teamMembers={initialTeamMembers} />
       </div>
-      <form>
-        <div><label htmlFor='nameInput'>Name</label>
-        <input type='text' id='nameInput' /></div>
-        <div><label htmlFor='ageInput'>Age</label>
-        <input type='text' id='ageInput' /></div>
-        <div><label htmlFor='titleInput'>Title</label>
-        <input type='text' id='titleInput' /></div>
-        <button>Submit</button>
-      </form>
+      <div>
+        <h2>Add or Edit team Member</h2>
+        <form>
+          <div>
+            <label htmlFor='nameInput'>Name</label>
+            <input type='text' id='nameInput' />
+          </div>
+          <div>
+            <label htmlFor='ageInput'>Age</label>
+            <input type='text' id='ageInput' />
+          </div>
+          <div>
+            <label htmlFor='titleInput'>Title</label>
+            <input type='text' id='titleInput' />
+          </div>
+          <button>Submit</button>
+        </form>
+      </div>
     </>
   );
 }
