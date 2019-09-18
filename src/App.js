@@ -8,6 +8,12 @@ const initialTeamMembers = [
   {id: uuid(), name: 'Justin', age: '40', title: 'Captain'},
 ];
 
+const initialFormValues = {
+  name: '',
+  age: '',
+  title: '',
+}
+
 function TeamMember({ teamMember }) {
   return (
     <div>
@@ -20,35 +26,72 @@ function TeamMember({ teamMember }) {
 
 function TeamList({ teamMembers }) {
   return (
-    teamMembers.map(teamMember => <TeamMember teamMember={ teamMember } />)
+    <>
+      <h2>Team List</h2>
+      <div>
+        <span>Name</span>
+        <span>Age</span>
+        <span>Title</span>
+      </div>
+      {teamMembers.map(teamMember => <TeamMember teamMember={ teamMember } />)}
+    </>
+  );
+} 
+
+function Form({formValues, handleChange, onSubmit, isDisabled}) {
+  return (
+    <>
+      <h2>Add Team Member</h2>
+      <form>
+        <div>
+          <label htmlFor='name'>Name</label>
+          <input value={formValues.name} onChange={handleChange} type='text' id='name' />
+        </div>
+        <div>
+          <label htmlFor='age'>Age</label>
+          <input value={formValues.age} onChange={handleChange} type='text' id='age' />
+        </div>
+        <div>
+          <label htmlFor='title'>Title</label>
+          <input value={formValues.title} onChange={handleChange} type='text' id='title' />
+        </div>
+        <button onClick={onSubmit} disabled={isDisabled()} >Submit</button>
+      </form>
+    </>
   );
 }
 
 function App() {
+  
   const [teamMembers, setTeamMembers] = useState(initialTeamMembers);
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.id]: e.target.value })
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setTeamMembers( [...teamMembers, formValues ]);
+    setFormValues(initialFormValues);
+  }
+
+  const isDisabled = () => !(formValues.name && formValues.age && formValues.title);
+
   return (
     <>
       <div className="App">
-        <h2>Team List</h2>
-        <TeamList teamMembers={ teamMembers } />
-      </div>
-      <div>
-        <h2>Add or Edit team Member</h2>
-        <form>
-          <div>
-            <label htmlFor='nameInput'>Name</label>
-            <input type='text' id='nameInput' />
-          </div>
-          <div>
-            <label htmlFor='ageInput'>Age</label>
-            <input type='text' id='ageInput' />
-          </div>
-          <div>
-            <label htmlFor='titleInput'>Title</label>
-            <input type='text' id='titleInput' />
-          </div>
-          <button>Submit</button>
-        </form>
+        <div className='team'>
+          <TeamList teamMembers={ teamMembers } />
+        </div>
+        <div className='form'>
+          <Form 
+            formValues={formValues}
+            handleChange={handleChange}
+            onSubmit={onSubmit}
+            isDisabled={isDisabled}
+          />
+        </div>
       </div>
     </>
   );
