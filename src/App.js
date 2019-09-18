@@ -72,7 +72,7 @@ function App() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTeamMembers( [...teamMembers, formValues ]);
+    setTeamMembers( [...teamMembers, { ...formValues, id: uuid() } ]);
     setFormValues(initialFormValues);
   }
 
