@@ -79,7 +79,14 @@ function App() {
     if (!formValues.id) {
       setTeamMembers( [...teamMembers, { ...formValues, id: uuid() } ]);
     } else {
-      debugger
+      const updatedTeamMembers = teamMembers.map(teamMember => {
+        if (teamMember.id === formValues.id) {
+          return formValues
+        } else {
+          return teamMember
+        }
+      })
+      setTeamMembers(updatedTeamMembers);
     }
     setFormValues(initialFormValues);
   }
