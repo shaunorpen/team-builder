@@ -12,6 +12,7 @@ const initialFormValues = {
   name: '',
   email: '',
   role: '',
+  id: '',
 }
 
 function TeamMember({ teamMember, memberToEdit }) {
@@ -75,7 +76,11 @@ function App() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTeamMembers( [...teamMembers, { ...formValues, id: uuid() } ]);
+    if (!formValues.id) {
+      setTeamMembers( [...teamMembers, { ...formValues, id: uuid() } ]);
+    } else {
+      debugger
+    }
     setFormValues(initialFormValues);
   }
 
