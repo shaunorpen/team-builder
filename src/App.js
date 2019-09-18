@@ -21,7 +21,7 @@ function TeamMember({ teamMember, memberToEdit }) {
       <span>{teamMember.email}</span>
       <span>{teamMember.role}</span>
       <span>
-        <button onClick={memberToEdit} >Edit</button>
+        <button onClick={() => memberToEdit(teamMember.id)} >Edit</button>
       </span>
     </div>
   );
@@ -81,9 +81,8 @@ function App() {
 
   const isDisabled = () => !(formValues.name && formValues.email && formValues.role);
 
-  const memberToEdit = (e) => {
-    debugger
-    return null;
+  const memberToEdit = (memberId) => {;
+    setFormValues(teamMembers.find(teamMember => teamMember.id === memberId));
   }
 
   return (
