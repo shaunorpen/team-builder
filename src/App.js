@@ -3,23 +3,23 @@ import uuid from 'uuid';
 import './App.css';
 
 const initialTeamMembers = [
-  {id: uuid(), name: 'Shaun', age: '37', title: 'Manager'},
-  {id: uuid(), name: 'Dave', age: '35', title: 'Coach'},
-  {id: uuid(), name: 'Justin', age: '40', title: 'Captain'},
+  {id: uuid(), name: 'Shaun', email: 'shaun@lambda.com', role: 'Coach'},
+  {id: uuid(), name: 'Dave', email: 'dave@lambda.com', role: 'Front End'},
+  {id: uuid(), name: 'Justin', email: 'justin@lambda.com', role: 'Back End'},
 ];
 
 const initialFormValues = {
   name: '',
-  age: '',
-  title: '',
+  email: '',
+  role: '',
 }
 
 function TeamMember({ teamMember }) {
   return (
     <div>
       <span>{teamMember.name}</span>
-      <span>{teamMember.age}</span>
-      <span>{teamMember.title}</span>
+      <span>{teamMember.email}</span>
+      <span>{teamMember.role}</span>
     </div>
   );
 }
@@ -30,8 +30,8 @@ function TeamList({ teamMembers }) {
       <h2>Team List</h2>
       <div>
         <span>Name</span>
-        <span>Age</span>
-        <span>Title</span>
+        <span>Email</span>
+        <span>Role</span>
       </div>
       {teamMembers.map(teamMember => <TeamMember teamMember={ teamMember } />)}
     </>
@@ -48,12 +48,12 @@ function Form({formValues, handleChange, onSubmit, isDisabled}) {
           <input value={formValues.name} onChange={handleChange} type='text' id='name' />
         </div>
         <div>
-          <label htmlFor='age'>Age</label>
-          <input value={formValues.age} onChange={handleChange} type='text' id='age' />
+          <label htmlFor='email'>Email</label>
+          <input value={formValues.email} onChange={handleChange} type='text' id='email' />
         </div>
         <div>
-          <label htmlFor='title'>Title</label>
-          <input value={formValues.title} onChange={handleChange} type='text' id='title' />
+          <label htmlFor='role'>Role</label>
+          <input value={formValues.role} onChange={handleChange} type='text' id='role' />
         </div>
         <button onClick={onSubmit} disabled={isDisabled()} >Submit</button>
       </form>
@@ -76,7 +76,7 @@ function App() {
     setFormValues(initialFormValues);
   }
 
-  const isDisabled = () => !(formValues.name && formValues.age && formValues.title);
+  const isDisabled = () => !(formValues.name && formValues.email && formValues.role);
 
   return (
     <>
