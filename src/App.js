@@ -14,17 +14,20 @@ const initialFormValues = {
   role: '',
 }
 
-function TeamMember({ teamMember }) {
+function TeamMember({ teamMember, memberToEdit }) {
   return (
     <div>
       <span>{teamMember.name}</span>
       <span>{teamMember.email}</span>
       <span>{teamMember.role}</span>
+      <span>
+        <button onClick={memberToEdit} >Edit</button>
+      </span>
     </div>
   );
 }
 
-function TeamList({ teamMembers }) {
+function TeamList({ teamMembers, memberToEdit }) {
   return (
     <>
       <h2>Team List</h2>
@@ -33,7 +36,7 @@ function TeamList({ teamMembers }) {
         <span>Email</span>
         <span>Role</span>
       </div>
-      {teamMembers.map(teamMember => <TeamMember teamMember={ teamMember } />)}
+      {teamMembers.map(teamMember => <TeamMember teamMember={ teamMember } memberToEdit={memberToEdit} key={teamMember.id} />)}
     </>
   );
 } 
@@ -78,11 +81,16 @@ function App() {
 
   const isDisabled = () => !(formValues.name && formValues.email && formValues.role);
 
+  const memberToEdit = (e) => {
+    debugger
+    return null;
+  }
+
   return (
     <>
       <div className="App">
         <div className='team'>
-          <TeamList teamMembers={ teamMembers } />
+          <TeamList teamMembers={ teamMembers } memberToEdit={memberToEdit} />
         </div>
         <div className='form'>
           <Form 
